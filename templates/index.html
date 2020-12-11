@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <style>
+    body { margin: 3%;background:lightgreen;}
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 600px;background:white;}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav">
+      <h4>API Admin</h4>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#section1">Home</a></li>
+        <li><a href="">CSV response</a></li>
+        <li><a href="#section3">JSON response</a></li>
+        <li><a href="/btc">All Data EndPoint</a></li>
+      </ul><br>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search Blog..">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+    </div>
+
+
+
+
+
+
+  		      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul>
+          {% for message in messages %}
+              <li class="alert alert-info">
+              <strong> {{ message }} </strong>
+              <span class="closebtn" style="float:right;background-color:red;color:white;padding:2px;width:25px;text-align:center;margin-bottom:26px;font-size:1em;cursor:pointer;font-weight:bold;border:2px solid white;border-radous:8%;">&times;</span>
+              </li>
+          {% endfor %}
+          </ul>
+          {% endif %}
+      {% endwith %}
+
+
+
+  <script>
+  var close = document.getElementsByClassName("closebtn");
+  var i;
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function(){
+      var div = this.parentElement;
+      div.style.opacity = "0";
+      setTimeout(function(){ div.style.display = "none"; }, 600);
+    }
+  }
+  </script>
+
+
+
+  <div class="col-sm-9">
+    <h2>New Query</h2>
+    <h5><span class="glyphicon glyphicon-time"></span> Last Query:
+     {% if pdate != '' %}
+      <span style="font-size:.925em;" class="label label-success">{{pdate}}</span>
+    {% else %}
+      <span style="font-size:.1em;color:yellow;" class="label label-info">Please Send Your First Request</span>
+    {% endif %}
+
+      </h5>
+
+
+      <div class="container">
+  <h2>Query</h2>
+  <form class="form-inline" action="/api" method="POST">
+    <div class="form-group">
+      <label for="start">Start Date:</label>
+      <input type="date" class="form-control" id="start" name="start">
+    </div>
+    <div class="form-group">
+      <label for="end"> End Date:</label>
+      <input type="date" class="form-control" id="end"  name="stop">
+    </div>
+    <button type="submit" class="btn btn-primary">Send Request</button>
+  </form>
+</div>
+
+<br />
+      <p>that function will loads BTC data from coinbase API and inserts into the inserts into the database please enter the start date and the end date then click Query this will load the data and provide link to download it as CSV response or JSON End point URL view</p>
+      <br><br>
+
+      <hr>
+
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid">
+  <p style="font-size:.825em;font-weight:bold;font-family:lemon;"><i>Developed By: Mahmoud Hegazy</i></p>
+</footer>
+
+</body>
+</html>
